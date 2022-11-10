@@ -1,0 +1,12 @@
+<table class="table">
+  <thead>
+    <tr>
+        {{#each config}}
+            <th scope="col">{{this.header}}</th>
+        {{/each}}
+    </tr>
+  </thead>
+   <tbody>
+    {{#list config table_data}}{{/list}}
+  </tbody>
+</table>
