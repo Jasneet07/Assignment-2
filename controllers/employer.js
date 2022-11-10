@@ -5,7 +5,7 @@ module.exports.dashboard = function (req, res, next) {
 };
 
 module.exports.view_post_jobs = function (req, res, next) {
-  res.render("employer_post_jobs");
+  res.render("employer_post_jobs",{post_tab_active: "post_tab_active"});
 };
 
 module.exports.add_post_jobs = function (req, res, next) {
@@ -111,7 +111,7 @@ module.exports.view_jobs = function (req, res, next) {
   Job.find({})
   .then((result) => {
         if(result) {
-                res.render("employer_view_jobs", {config : columnConfiguration, table_data : result});
+                res.render("employer_view_jobs", {config : columnConfiguration, table_data : result, view_tab_active: "view_tab_active"});
         }      
 
   })
@@ -119,12 +119,14 @@ module.exports.view_jobs = function (req, res, next) {
 };
 
 module.exports.delete_jobs = (req,res, next) => {
-      const {id} = req.body;
-      Job.deleteOne({ id : id}, function (err) {
-        if (err) {
-          console.log(`Err`, err);
-          return err
-        }
-        res.redirect("/empployer/dashboard")
-      });
+      // const {id} = req.body;
+      // Job.deleteOne({ id : id}, function (err) {
+      //   if (err) {
+      //     console.log(`Err`, err);
+      //     return err
+      //   }
+      //   res.redirect("/empployer/dashboard")
+      // });
+      console.log(`Delete`);
+      res.redirect("/employer/dashboard")
 }

@@ -42,10 +42,17 @@
             value="{{cpassword}}"
           />
         </div>
-        {{! <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-      <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div> }}
+        <div>
+              <b>Login As:</b>
+              <div class="form-group form-check">
+                <input type="radio" class="form-check-input" id="exampleCheck1" value="employer" name = "registerAs"/>
+                <label class="form-check-label" for="exampleCheck1">Employer</label>
+              </div>
+              <div class="form-group form-check">
+                <input type="radio" class="form-check-input" id="exampleCheck1" value="employee" name = "registerAs"/>
+                <label class="form-check-label" for="exampleCheck1">Employee</label>
+              </div>
+        </div>
         <button type="submit" class="btn btn-primary mt-4">Submit</button>
       </form>
       <a href="/login">Login</a>

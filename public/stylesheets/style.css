@@ -165,3 +165,13 @@ a {
 #tabs span:hover {
     cursor: pointer;
 }
+
+.post_tab_active {
+  padding-bottom: 8px;
+  border-bottom: 3px solid blue;
+}
+
+.view_tab_active {
+  padding-bottom: 8px;
+  border-bottom: 3px solid blue;
+}

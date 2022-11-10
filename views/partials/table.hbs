@@ -1,12 +1,25 @@
 <table class="table">
   <thead>
     <tr>
-        {{#each config}}
-            <th scope="col">{{this.header}}</th>
-        {{/each}}
+      {{#each config}}
+        <th scope="col">{{this.header}}</th>
+      {{/each}}
     </tr>
   </thead>
-   <tbody>
+  <tbody>
     {{#list config table_data}}{{/list}}
   </tbody>
 </table>
+
+<script>
+  const del = document.getElementById("Delete"); 
+  del?.addEventListener('click', function(e) {
+      fetch(`http://localhost:3000/employer/delete_jobs`, {
+            method: 'DELETE',
+            headers: {
+                'Content-type': 'application/json'
+            }
+        });
+  })
+  
+</script>

@@ -7,11 +7,11 @@ module.exports.register = function (req, res, next) {
 };
 
 module.exports.handleRegister = function (req, res, next) {
-  const { email, password, cpassword } = req.body;
+  const { email, password, cpassword, registerAs } = req.body;
 
   let errors = [];
 
-  if (!email || !password || !cpassword)
+  if (!email || !password || !cpassword || !registerAs)
     errors.push({ msg: "Please fill all the fields!!" });
 
   if (password !== cpassword) errors.push({ msg: "Password does not match" });
@@ -25,6 +25,7 @@ module.exports.handleRegister = function (req, res, next) {
       email,
       password,
       cpassword,
+      registerAs
     });
   } else {
     //Validation passed
@@ -38,11 +39,13 @@ module.exports.handleRegister = function (req, res, next) {
           email,
           password,
           cpassword,
+          registerAs
         });
       } else {
         const newUser = new User({
           email,
           password,
+          registerAs
         });
 
         bcrypt.genSalt(10, (err, salt) => {
@@ -54,6 +57,7 @@ module.exports.handleRegister = function (req, res, next) {
             newUser
               .save()
               .then((user) => {
+                console.log(`User`, user);
                 req.flash(
                   "success_msg",
                   "You are now registered and can login"
@@ -72,10 +76,17 @@ module.exports.login = function (req, res, next) {
   res.render("login");
 };
 
-module.exports.handleLogin = (req, res, next) => {
+module.exports.handleLogin = async (req, res, next) => {
+  let successRedirect;
+  let savedUser = await User.find({email : req.body.email})
+  
+  if (savedUser[0]?.registerAs ==='employer')
+      successRedirect = "/employer/dashboard"
+  else  
+      successRedirect = "/employee/dashboard"
 
   passport.authenticate("local", {
-    successRedirect: "/employer/dashboard",
+    successRedirect,
     failureRedirect: "/login",
     failureFlash: true,
   })(req, res, next);
