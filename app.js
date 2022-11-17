@@ -27,7 +27,7 @@ const hbs = expbs.create({
         let td = "";
         for (let j = 0; j < config.length; j++) {
               if (config[j].type === "delete"){
-                  td+= '<td><button type="submit" id="Delete">Delete</button></td>'
+                  td+= '<td><button type="submit" id="Delete" class="btn btn-primary" >Delete</button></td>'
                   continue
               }
           td += "<td>" + data[i][config[j].accessor] + "</td>";
@@ -36,6 +36,11 @@ const hbs = expbs.create({
       }
       return tr;
     },
+    tl : function(value, options) {
+          return value.map(val => (
+                options.fn({title : val.title, company : val.company_name, location : val.location})
+          ))
+    }
   },
 });
 

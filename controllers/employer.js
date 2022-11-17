@@ -114,6 +114,7 @@ module.exports.view_jobs = function (req, res, next) {
         
   Job.find({posted_by : req.user.email})
   .then((result) => {
+        console.log(`Result Employer`, result);
         if(result) {
                 res.render("employer_view_jobs", {config : columnConfiguration, table_data : result, view_tab_active: "view_tab_active"});
         }      
