@@ -22,6 +22,8 @@ module.exports.add_post_jobs = function (req, res, next) {
   let errors = [];
   let savedJob;
 
+  const posted_by  = req.user.email;
+
   if (
     !title ||
     !description ||
@@ -58,6 +60,7 @@ module.exports.add_post_jobs = function (req, res, next) {
           pay,
           location,
           company_name,
+          posted_by
         });
         job
           .save()
@@ -107,8 +110,9 @@ module.exports.view_jobs = function (req, res, next) {
                         accessor : "",
                         type : "delete"
                 }
-        ]
-  Job.find({})
+        ];
+        
+  Job.find({posted_by : req.user.email})
   .then((result) => {
         if(result) {
                 res.render("employer_view_jobs", {config : columnConfiguration, table_data : result, view_tab_active: "view_tab_active"});

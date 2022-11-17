@@ -84,12 +84,14 @@ module.exports.handleLogin = async (req, res, next) => {
       successRedirect = "/employer/dashboard"
   else  
       successRedirect = "/employee/dashboard"
-
+  
+  
   passport.authenticate("local", {
     successRedirect,
     failureRedirect: "/login",
     failureFlash: true,
   })(req, res, next);
+  
 };
 
 module.exports.logout = (req,res,next) => {

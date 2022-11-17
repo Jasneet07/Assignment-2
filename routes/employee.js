@@ -8,12 +8,10 @@ let employee = require("../controllers/employee");
 
 router.get("/dashboard", ensureAuthenticated, employee.dashboard);
 
-// router.get("/post_jobs",ensureAuthenticated, employer.view_post_jobs);
+router.get("/view_details", ensureAuthenticated, employee.employee_details);
 
-// router.post("/post_jobs",employer.add_post_jobs)
+router.get("/view_apply_jobs", ensureAuthenticated, employee.employee_view_apply_jobs);
 
-// router.get("/view_jobs",ensureAuthenticated, employer.view_jobs)
-
-// router.delete("/delete_jobs",employer.delete_jobs);
+router.get("/applied_jobs", ensureAuthenticated, employee.employee_applied_jobs);
 
 module.exports = router;

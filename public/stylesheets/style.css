@@ -166,12 +166,15 @@ a {
     cursor: pointer;
 }
 
-.post_tab_active {
+.post_tab_active,.view_tab_active,.tab_detail,.tab_view_apply_jobs,.tab_applied_jobs{
   padding-bottom: 8px;
   border-bottom: 3px solid blue;
 }
 
-.view_tab_active {
-  padding-bottom: 8px;
-  border-bottom: 3px solid blue;
+
+.tag {
+  background-color: rgb(237, 234, 234);
+  padding : 2px 10px;
+  border-radius: 2px;
+  font-weight: 600;
 }
