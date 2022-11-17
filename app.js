@@ -38,8 +38,11 @@ const hbs = expbs.create({
     },
     tl : function(value, options) {
           return value.map(val => (
-                options.fn({title : val.title, company : val.company_name, location : val.location})
+                options.fn({id : val._id, title : val.title, company : val.company_name, location : val.location, job : value})
           ))
+    },
+    json : function(id) {
+        return JSON.stringify(id)
     }
   },
 });
@@ -77,7 +80,7 @@ app.use((req, res, next) => {
 
 app.use("/", require("./routes/index"));
 app.use("/employer", require("./routes/employer"));
-app.use("/employee", require("./routes/employee"))
+app.use("/employee", require("./routes/employee"));
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {

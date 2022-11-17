@@ -1,6 +1,5 @@
 {{> avatar_navbar}}
 <br>
-{{!-- <h1 style="margin-left: 35px;">Search</h1> --}}
 {{>tabs1}}
 {{> messages}}
 
@@ -8,7 +7,7 @@
     <div class="row">
         <div class="col-md-6 col-12">
             {{#tl job}}
-                <div class="card mb-4" style="width: 100%">
+                <div class="card mb-4" style="width: 100%" onclick = "cardClick({{json id}})" id = {{id}}>
                     <div class="card-body">
                         <h5 class="card-title">{{title}}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">{{company}}</h6>
@@ -24,12 +23,44 @@
         <div class="col-md-6 col-12">
             <div class="card" style="width: 100%">
                 <div class="card-body">
-                    <h5 class="card-title">Software Developer</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Expert EduTech</h6>
-                    <h6 class="card-subtitle mb-4 text-muted">Lucknow, Uttar Pradesh</h6>
-                    <button class="btn btn-primary">Apply</button>
+                    <h5 class="card-title" id = "job-title"></h5>
+                    <h6 class="card-subtitle mb-2 text-muted" id = "job-company"></h6>
+                    <h6 class="card-subtitle mb-4 text-muted" id = "job-location"></h6>
+                    <button class="btn btn-primary" onclick="applyJob()">Apply</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    let globalId;
+
+    function cardClick(id) {
+
+            globalId = id;        
+
+            fetch(`http://localhost:3000/employee/applied_jobs/${id}`, {
+                method : 'POST'
+            })
+            .then(res => res.json())
+            .then(data =>  {
+                let result = data.result;
+                const title = document.getElementById("job-title");
+                const company = document.getElementById("job-company");
+                const location = document.getElementById("job-location");
+
+                title.innerHTML = result.title;
+                company.innerHTML = result.company_name;
+                location.innerHTML = result.location;
+            })
+    }
+
+    function applyJob() {
+            fetch(`http://localhost:3000/employee/set_job/${globalId}`, {
+                method : 'POST'
+            })
+            .then(res => res.json())
+            .then(json => console.log(json))
+    }
+</script>

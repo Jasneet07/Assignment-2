@@ -33,7 +33,7 @@ module.exports.add_post_jobs = function (req, res, next) {
     !company_name
   ) {
     errors.push({ msg: "Please add all the mandatory fields" });
-    res.render("employer_post_jobs", { errors });
+    res.render("employer_post_jobs", { errors, post_tab_active: "post_tab_active" });
     return;
   }
 
@@ -50,6 +50,7 @@ module.exports.add_post_jobs = function (req, res, next) {
           experience,
           location,
           company_name,
+          post_tab_active: "post_tab_active"
         });
       } else {
         const job = new Job({
@@ -67,7 +68,7 @@ module.exports.add_post_jobs = function (req, res, next) {
           .then((result) => {
             success_msg = "Job is successfully saved!!";
             savedJob = { ...result };
-            res.render("employer_post_jobs", { errors, savedJob, success_msg });
+            res.render("employer_post_jobs", { errors, savedJob, success_msg, post_tab_active: "post_tab_active" });
           })
           .catch((err) => errors.push({ msg: err }));
       }
@@ -114,7 +115,6 @@ module.exports.view_jobs = function (req, res, next) {
         
   Job.find({posted_by : req.user.email})
   .then((result) => {
-        console.log(`Result Employer`, result);
         if(result) {
                 res.render("employer_view_jobs", {config : columnConfiguration, table_data : result, view_tab_active: "view_tab_active"});
         }      

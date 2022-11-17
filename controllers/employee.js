@@ -1,5 +1,6 @@
 const Users = require("../models/schemas/User");
 const Job = require("../models/schemas/Job");
+const JobApplied = require("../models/schemas/Applied");
 
 module.exports.dashboard = function (req, res, next) {
     res.render("employee_dashboard");
@@ -33,6 +34,35 @@ module.exports.employee_view_apply_jobs = function(req, res, next){
         
 }
 
-module.exports.employee_applied_jobs = function(req, res, next){
+module.exports.employee_applied_jobs_get = function(req, res, next){
   res.render("employee_applied_jobs", {tab_applied_jobs : "tab_applied_jobs"});
+}
+
+module.exports.employee_applied_jobs_post = function(req, res, next) {
+      const id = req.params.id;
+      
+      Job.findById(id)
+      .then(result => res.status(201).json({result}))
+      .catch(err => console.log(err))
+
+}
+
+module.exports.employee_set_job = function(req, res, next) {
+      const id = req.params.id;
+
+      Job.findById(id)
+      .then(result => {
+          const jobApplied = new JobApplied({
+            job_title : result.title,
+            email : req.user.email
+          })
+
+          jobApplied
+          .save()
+          .then(result => {
+            console.log(`Result`, result);
+          })
+          .catch(err => console.log(err))
+      })
+      .catch(err => console.log(err))
 }
