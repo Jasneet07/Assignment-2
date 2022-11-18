@@ -1,7 +1,24 @@
 {{> avatar_navbar}}
 <br>
-{{!-- <h1 style="margin-left: 35px;">Search</h1> --}}
 {{>tabs1}}
 {{> messages}}
 
-<h1>Applied Jobs</h1>
+<div class="container w-50 p-3">
+    <div class="row">
+        <div class="col-12">
+            {{#jtl job}}
+                <div class="card mb-4" style="width: 100%" id = {{id}}>
+                    <div class="card-body">
+                        <h5 class="card-title">{{title}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{company}}</h6>
+                        <h6 class="card-subtitle mb-4 text-muted">{{location}}</h6>
+                        <div class="card-text">
+                            <span class="tag">100$</span>&nbsp;
+                            <span class="tag">Part-Time</span>
+                        </div>
+                    </div>
+                </div>
+            {{/jtl}}
+        </div>
+    </div>
+</div>

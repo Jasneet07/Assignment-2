@@ -26,24 +26,41 @@ const hbs = expbs.create({
       for (let i = 0; i < data.length; i++) {
         let td = "";
         for (let j = 0; j < config.length; j++) {
-              if (config[j].type === "delete"){
-                  td+= '<td><button type="submit" id="Delete" class="btn btn-primary" >Delete</button></td>'
-                  continue
-              }
+          if (config[j].type === "delete") {
+            td +=
+              '<td><button type="submit" id="Delete" class="btn btn-primary" >Delete</button></td>';
+            continue;
+          }
           td += "<td>" + data[i][config[j].accessor] + "</td>";
         }
         tr += "<tr>" + td + "</tr>";
       }
       return tr;
     },
-    tl : function(value, options) {
-          return value.map(val => (
-                options.fn({id : val._id, title : val.title, company : val.company_name, location : val.location, job : value})
-          ))
+
+    tl: function (value, options) {
+      return value.map((val) =>
+        options.fn({
+          id: val._id,
+          title: val.title,
+          company: val.company_name,
+          location: val.location
+        })
+      );
     },
-    json : function(id) {
-        return JSON.stringify(id)
-    }
+
+    jtl: function (value, options) {
+      return value?.map((val) =>
+        options.fn({
+          title: val?.job_info?.title,
+          company: val?.job_info?.company_name,
+          location: val?.job_info?.location,
+        })
+      );
+    },
+    json: function (id) {
+      return JSON.stringify(id);
+    },
   },
 });
 
