@@ -13,10 +13,10 @@
 
 <script>
 
-    let env = 'local_uri';
+    let env = 'dev_uri';
 
-    function deleteRow(id) {
-          fetch(`${localStorage.getItem(`${env}`)}/employer/delete_jobs/${id}`, {
+    function deleteRow(job_title) {
+          fetch(`${localStorage.getItem(`${env}`)}/employer/delete_jobs/${job_title}`, {
                 method : 'DELETE'
             })
           .then((result) => {

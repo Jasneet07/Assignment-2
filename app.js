@@ -30,7 +30,7 @@ const hbs = expbs.create({
         for (let j = 0; j < config.length; j++) {
           if (config[j].type === "delete") {
             td +=
-              `<td><button type="submit" onclick="deleteRow('${data[i]._id}')" class="btn btn-primary">Delete</button></td>`;
+              `<td><button type="submit" onclick="deleteRow('${data[i].title}')" class="btn btn-primary">Delete</button></td>`;
             continue;
           }
           td += "<td>" + data[i][config[j].accessor] + "</td>";

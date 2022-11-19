@@ -79,31 +79,39 @@ module.exports.employee_applied_jobs_post = function (req, res, next) {
 
 module.exports.employee_set_job = function (req, res, next) {
   const id = req.params.id;
+  let success_msg;
 
   Job.findById(id)
-    .then((result) => {
-      JobApplied.find({ job_title: result.title, email: req.user.email }).then(
-        (res) => {
-          if (!res || !res.length) {
+    .then((answer) => {
+      JobApplied.find({ job_title: answer.title, email: req.user.email }).then(
+        (result) => {
+
+          if (!result || !result.length) {
             const jobApplied = new JobApplied({
-              job_title: result.title,
+              job_title: answer.title,
               email: req.user.email,
               job_info: {
-                title: result.title,
-                company_name: result.company_name,
-                location: result.location,
+                title: answer.title,
+                company_name: answer.company_name,
+                location: answer.location,
               },
             });
 
             jobApplied
               .save()
               .then((output) => {
-                console.log(`Renier`, output);
+                    success_msg = "Applied successfully!!";
+                    console.log(`Output`, output)
+                    res.send({success_msg})
               })
-              .catch((err) => console.log(err));
+              .catch((err) => console.log(`Inside Error`, err));
+          }
+          else {
+              let error_msg = "Already Applied !!";
+              res.send({error_msg})
           }
         }
       );
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(`Outside Error`, err));
 };

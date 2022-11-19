@@ -8,8 +8,8 @@ function waitForElement(id, callback) {
 }
 
 waitForElement("form", function () {
-  let LOCAL_URI = `http://localhost:3000`;
-  let DEV_URI = `https://job-agency-assignment-2.azurewebsites.net`
+  let DEV_URI = `http://localhost:3000`;
+  let PROD_URI = `https://job-agency-assignment-2.azurewebsites.net`
 
   document
     .getElementById("email")
@@ -21,8 +21,8 @@ waitForElement("form", function () {
     .getElementById("cpassword")
     ?.setAttribute("placeholder", "Confirm Password");
   
-  localStorage.setItem('local_uri', LOCAL_URI);
-  localStorage.setItem('dev_uri', DEV_URI)
+  localStorage.setItem('dev_uri', DEV_URI);
+  localStorage.setItem('prod_uri', PROD_URI)
 });
 
 

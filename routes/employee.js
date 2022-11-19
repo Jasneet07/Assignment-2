@@ -6,11 +6,11 @@ let router = express.Router();
 let employee = require("../controllers/employee");
 
 
-router.get("/dashboard", ensureAuthenticated, employee.dashboard);
+// router.get("/dashboard", ensureAuthenticated, employee.dashboard);
 
 router.get("/view_details", ensureAuthenticated, employee.employee_details);
 
-router.post("/edit_details/:id", employee.employee_edit_details);
+router.post("/edit_details/:id",ensureAuthenticated, employee.employee_edit_details);
 
 router.get("/view_apply_jobs", ensureAuthenticated, employee.employee_view_apply_jobs);
 

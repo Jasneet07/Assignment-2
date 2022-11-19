@@ -81,17 +81,18 @@ module.exports.handleLogin = async (req, res, next) => {
   let savedUser = await User.find({email : req.body.email})
   
   if (savedUser[0]?.registerAs ==='employer')
-      successRedirect = "/employer/dashboard"
+      successRedirect = "/employer/post_jobs"
   else  
-      successRedirect = "/employee/dashboard"
-  
-  
+      successRedirect = "/employee/view_details"
+ 
+      
   passport.authenticate("local", {
     successRedirect,
     failureRedirect: "/login",
     failureFlash: true,
   })(req, res, next);
-  
+
+
 };
 
 module.exports.logout = (req,res,next) => {

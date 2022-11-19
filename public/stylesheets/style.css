@@ -178,3 +178,11 @@ a {
   border-radius: 2px;
   font-weight: 600;
 }
+
+.alert-active {
+    display: block;
+}
+
+.alert-inactive {
+    display: none;
+}
