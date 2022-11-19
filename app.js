@@ -22,13 +22,15 @@ const hbs = expbs.create({
   partialsDir: path.join(__dirname, "views/partials"),
   helpers: {
     list: function (config, data, block) {
+      console.log(`Table Data`, data);
+
       let tr = "";
       for (let i = 0; i < data.length; i++) {
         let td = "";
         for (let j = 0; j < config.length; j++) {
           if (config[j].type === "delete") {
             td +=
-              '<td><button type="submit" id="Delete" class="btn btn-primary" >Delete</button></td>';
+              `<td><button type="submit" onclick="deleteRow('${data[i]._id}')" class="btn btn-primary">Delete</button></td>`;
             continue;
           }
           td += "<td>" + data[i][config[j].accessor] + "</td>";

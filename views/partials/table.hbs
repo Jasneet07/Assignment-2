@@ -12,14 +12,19 @@
 </table>
 
 <script>
-  const del = document.getElementById("Delete"); 
-  del?.addEventListener('click', function(e) {
-      fetch(`http://localhost:3000/employer/delete_jobs`, {
-            method: 'DELETE',
-            headers: {
-                'Content-type': 'application/json'
-            }
-        });
-  })
+
+    let env = 'local_uri';
+
+    function deleteRow(id) {
+          fetch(`${localStorage.getItem(`${env}`)}/employer/delete_jobs/${id}`, {
+                method : 'DELETE'
+            })
+          .then((result) => {
+                window.location.reload();
+          })
+          .catch(err => {
+            console.log(err)
+          })
+    }
   
 </script>

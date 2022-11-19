@@ -123,15 +123,16 @@ module.exports.view_jobs = function (req, res, next) {
   .catch(err => console.log('Err', err))
 };
 
+
 module.exports.delete_jobs = (req,res, next) => {
-      // const {id} = req.body;
-      // Job.deleteOne({ id : id}, function (err) {
-      //   if (err) {
-      //     console.log(`Err`, err);
-      //     return err
-      //   }
-      //   res.redirect("/empployer/dashboard")
-      // });
-      console.log(`Delete`);
-      res.redirect("/employer/dashboard")
+      const {id} = req.params;
+
+      Job.deleteOne({ _id : id}, function (err, result) {
+        if (err) {
+          console.log(`Err`, err);
+          return err
+        }
+        console.log(`Result`, result);
+        res.send(result);
+      });
 }

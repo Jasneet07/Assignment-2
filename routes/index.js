@@ -23,7 +23,7 @@ router.post('/register', userAuthentication.handleRegister);
 router.get('/logout', userAuthentication.logout);
 
 
-router.get('/home', index.home);
+router.get('/', index.home);
 
 router.get("/about",index.about);
 

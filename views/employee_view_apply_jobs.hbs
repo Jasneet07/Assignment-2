@@ -35,12 +35,13 @@
 
 <script>
     let globalId;
+    let env = 'local_uri';
 
     function cardClick(id) {
 
             globalId = id;        
 
-            fetch(`http://localhost:3000/employee/applied_jobs/${id}`, {
+            fetch(`${localStorage.getItem(`${env}`)}/employee/applied_jobs/${id}`, {
                 method : 'POST'
             })
             .then(res => res.json())
@@ -58,7 +59,7 @@
 
     function applyJob() {
 
-            fetch(`http://localhost:3000/employee/set_job/${globalId}`, {
+            fetch(`${localStorage.getItem(`${env}`)}/employee/set_job/${globalId}`, {
                 method : 'POST'
             })
             .then(res => res.json())
