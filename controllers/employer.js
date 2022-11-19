@@ -1,9 +1,6 @@
 const Job = require("../models/schemas/Job");
 const JobApplied = require("../models/schemas/Applied");
 
-module.exports.dashboard = function (req, res, next) {
-  res.render("employer_dashboard");
-};
 
 module.exports.view_post_jobs = function (req, res, next) {
   res.render("employer_post_jobs", { post_tab_active: "post_tab_active" });

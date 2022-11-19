@@ -3,9 +3,6 @@ const Job = require("../models/schemas/Job");
 const JobApplied = require("../models/schemas/Applied");
 const User = require("../models/schemas/User");
 
-module.exports.dashboard = function (req, res, next) {
-  res.render("employee_dashboard");
-};
 
 module.exports.employee_details = function (req, res, next) {
   const { email } = req.user;
